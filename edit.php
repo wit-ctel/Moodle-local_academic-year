@@ -38,7 +38,7 @@ list($context, $course, $cm) = get_context_info_array($contextid);
 require_login($course, false, $cm);
 require_capability('moodle/site:config', $context);
 
-$contextname = print_context_name($context);
+$contextname = $context->get_context_name();
 
 $PAGE->set_context($context);
 
