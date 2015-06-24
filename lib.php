@@ -78,7 +78,7 @@ function local_academicyear_available_academic_years() {
  * Extend the Course Administration settings with a menu item
  * to edit the academic year a course is assigned to
  */
-function local_academicyear_extends_settings_navigation($nav, $context) {
+function local_academicyear_extend_settings_navigation($nav, $context) {
     
     if(isset($context) && has_capability('moodle/site:config', $context)) {
         if (($branch = $nav->get('courseadmin'))) {
