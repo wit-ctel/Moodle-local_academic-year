@@ -27,6 +27,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_academicyear'; // To check on upgrade, that module sits in correct place
-$plugin->version   = 2014052000;      // The current module version (Date: YYYYMMDDXX)
-$plugin->requires  = 2012062504;      // Requires this Moodle version
+$plugin->version   = 2016060800;      // The current module version (Date: YYYYMMDDXX)
+$plugin->requires  = 2016052300;      // Requires this Moodle version
 $plugin->cron      = 0;               // Period for cron to check this module (secs)
