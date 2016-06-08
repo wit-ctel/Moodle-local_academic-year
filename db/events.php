@@ -26,18 +26,19 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$handlers = array (
-    'course_created' => array (
-        'handlerfile'      => '/local/academicyear/lib.php',
-        'handlerfunction'  => array('academicyear_course_handler', 'course_created'),
-        'schedule'         => 'instant',
-        'internal'         => 1,
+$observers = array (
+    
+    array(
+        'eventname'   => '\core\event\course_created',
+        'callback'    =>  'academicyear_course_observer::course_created',
+        'priority'    => 200,
+        'internal'    => true
     ),
- 
-    'course_deleted' => array (
-        'handlerfile'      => '/local/academicyear/lib.php',
-        'handlerfunction'  => array('academicyear_course_handler', 'course_deleted'),
-        'schedule'         => 'instant',
-        'internal'         => 1,
-    ),
+    
+    array(
+        'eventname'   => '\core\event\course_deleted',
+        'callback'    => 'academicyear_course_observer::course_deleted',
+        'priority'    => 200,
+        'internal'    => true
+    )
 );

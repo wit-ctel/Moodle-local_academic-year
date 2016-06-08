@@ -95,7 +95,7 @@ function local_academicyear_extend_settings_navigation($nav, $context) {
  * lmb enrolment plugin injects a 'term' value into the course idnumber field,
  * we use this to identify the course target academic year
  */
-class academicyear_course_handler {
+class academicyear_course_observer {
   
   /**
    * Adds an entry in the local_academicyear table for
