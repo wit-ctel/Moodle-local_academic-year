@@ -26,19 +26,19 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $observers = array (
     
     array(
         'eventname'   => '\core\event\course_created',
         'callback'    =>  'academicyear_course_observer::course_created',
-        'priority'    => 200,
-        'internal'    => true
+        'includefile' => '/local/academicyear/locallib.php'
     ),
     
     array(
         'eventname'   => '\core\event\course_deleted',
         'callback'    => 'academicyear_course_observer::course_deleted',
-        'priority'    => 200,
-        'internal'    => true
-    )
+        'includefile' => '/local/academicyear/locallib.php'
+    ),
 );
