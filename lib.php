@@ -275,9 +275,16 @@ class academic_year_cli {
         $newcategory->idnumber = $category->idnumber;
         $newcategory->description = $category->description;
         $newcategory->descriptionformat = $category->descriptionformat;
-  
-        $newcategory = create_course_category($newcategory);
-        move_category($newcategory, $newparentcat);
+        
+        try {
+            $newcategory = coursecat::create($newcategory);
+        } catch (moodle_exception $e) {
+            mtrace("unable to create category {$newcategory->name}, {$newcategory->idnumber}");
+            mtrace($e->debuginfo);
+            return;
+        }
+        
+        $newcategory->change_parent($newparentcat);
   
         if ($children = $DB->get_records('course_categories', array('parent'=>$category->id), 'sortorder ASC')) {
             foreach ($children as $childcat) {
