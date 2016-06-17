@@ -272,7 +272,7 @@ class academic_year_cli {
   
         $newcategory = new stdClass();
         $newcategory->name = $category->name;
-        $newcategory->idnumber = $category->idnumber;
+        $newcategory->idnumber = null;
         $newcategory->description = $category->description;
         $newcategory->descriptionformat = $category->descriptionformat;
         
