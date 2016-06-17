@@ -165,7 +165,7 @@ class academicyear_course_handler {
   }
 }
 
-include_once($CFG->dirroot . "/course/lib.php");
+require_once($CFG->libdir . '/coursecatlib.php');
 require_once($CFG->libdir.'/clilib.php');
 
 /**
@@ -224,8 +224,7 @@ class academic_year_cli {
             return $existing;
         }
 
-        $category = create_course_category($category);
-        
+        $category = coursecat::create($category);
         fix_course_sortorder();
 
         return $category;
