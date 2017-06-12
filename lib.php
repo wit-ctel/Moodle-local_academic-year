@@ -88,7 +88,7 @@ function local_academicyear_extend_settings_navigation($nav, $context) {
     }
 }
 
-include_once($CFG->dirroot . "/course/lib.php");
+include_once($CFG->dirroot . "/lib/coursecatlib.php");
 require_once($CFG->libdir.'/clilib.php');
 
 /**
@@ -147,7 +147,7 @@ class academic_year_cli {
             return $existing;
         }
 
-        $category = create_course_category($category);
+        $category = coursecat::create($category);
         
         fix_course_sortorder();
 
@@ -200,8 +200,8 @@ class academic_year_cli {
         $newcategory->description = $category->description;
         $newcategory->descriptionformat = $category->descriptionformat;
   
-        $newcategory = create_course_category($newcategory);
-        move_category($newcategory, $newparentcat);
+        $newcategory = coursecat::create($category);
+        $newcategory->change_parent($newparentcat);
   
         if ($children = $DB->get_records('course_categories', array('parent'=>$category->id), 'sortorder ASC')) {
             foreach ($children as $childcat) {
