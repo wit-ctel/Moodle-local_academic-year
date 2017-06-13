@@ -121,13 +121,6 @@ class academic_year_cli {
         
         mtrace("Copying category structure from {$currentacademicyearcategory->name}");
         $this->copy_category_structure_into_new_category($currentacademicyearcategory, $newacademicyearcategory);
-    
-        mtrace("Creating enrolment term for {$newacademicyearcategory->name}");
-        $lmbterm = $this->create_enrolment_term($newacademicyearcategory);
-        $lmbtermcat = $this->create_enrolment_term_category($newacademicyearcategory, $lmbterm);
-        
-        mtrace("Linking course categories to enrolment categories ...");
-        $this->link_enrolment_categories($currentacademicyearcategory, $newacademicyearcategory);
         
         mtrace("All done");
     }
