@@ -189,7 +189,20 @@ class academic_year_cli {
   
         $newcategory = new stdClass();
   
-        $newcategory = coursecat::create($category);
+        try {
+            $newcategory = coursecat::create($category);
+        } catch (moodle_exception $e) {
+            // we can recover from a duplicate category id
+            if ($e->errorcode == 'categoryidnumbertaken') {
+                $category->idnumber = $category->idnumber . '.' . $this->startyear;
+                $newcategory = coursecat::create($category);
+            } else {
+                $info = get_exception_info($e);
+                mtrace('Error creating category: ' . var_export($newcategory, true) . ' Exception ' . get_class($e), $info->message, $info->backtrace);
+                exit(1);
+            }
+        }
+            
         $newcategory->change_parent($newparentcat);
   
         if ($children = $DB->get_records('course_categories', array('parent'=>$category->id), 'sortorder ASC')) {
