@@ -188,10 +188,6 @@ class academic_year_cli {
         global $DB;
   
         $newcategory = new stdClass();
-        $newcategory->name = $category->name;
-        $newcategory->idnumber = $category->idnumber;
-        $newcategory->description = $category->description;
-        $newcategory->descriptionformat = $category->descriptionformat;
   
         $newcategory = coursecat::create($category);
         $newcategory->change_parent($newparentcat);
