@@ -186,15 +186,16 @@ class academic_year_cli {
      */
     private function category_copy_to($category, $newparentcat) {
         global $DB;
-  
+
         $newcategory = new stdClass();
-  
+
         try {
+            mtrace("copying {$category->name} to {$newparentcat->name}");
             $newcategory = coursecat::create($category);
         } catch (moodle_exception $e) {
             // we can recover from a duplicate category id
             if ($e->errorcode == 'categoryidnumbertaken') {
-                $category->idnumber = $category->idnumber . '.' . $this->startyear;
+                $category->idnumber = $category->name . '.' . $this->startyear;
                 $newcategory = coursecat::create($category);
             } else {
                 $info = get_exception_info($e);
@@ -202,7 +203,7 @@ class academic_year_cli {
                 exit(1);
             }
         }
-            
+
         $newcategory->change_parent($newparentcat);
   
         if ($children = $DB->get_records('course_categories', array('parent'=>$category->id), 'sortorder ASC')) {
